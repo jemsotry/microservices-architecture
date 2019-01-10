@@ -8,15 +8,15 @@ import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
 public class AddProductCommand {
 
     @TargetAggregateIdentifier
-    private final String id;
+    private final Long id;
     private final String name;
 
-    public AddProductCommand(String id, String name) {
+    public AddProductCommand(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 

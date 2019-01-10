@@ -1,16 +1,19 @@
 package com.soagrowers.productquery.handlers;
 
-import com.soagrowers.productevents.events.ProductAddedEvent;
-import com.soagrowers.productevents.events.ProductSaleableEvent;
-import com.soagrowers.productevents.events.ProductUnsaleableEvent;
-import com.soagrowers.productquery.domain.Product;
-import com.soagrowers.productquery.repository.ProductRepository;
+import java.math.BigDecimal;
+
 import org.axonframework.eventhandling.annotation.EventHandler;
 import org.axonframework.eventhandling.replay.ReplayAware;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.soagrowers.productevents.events.ProductAddedEvent;
+import com.soagrowers.productevents.events.ProductSaleableEvent;
+import com.soagrowers.productevents.events.ProductUnsaleableEvent;
+import com.soagrowers.productquery.domain.Product;
+import com.soagrowers.productquery.repository.ProductRepository2;
 
 /**
  * Created by Ben on 10/08/2015.
@@ -21,19 +24,20 @@ public class ProductViewEventHandler implements ReplayAware {
     private static final Logger LOG = LoggerFactory.getLogger(ProductViewEventHandler.class);
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductRepository2 productRepository;
 
     @EventHandler
     public void handle(ProductAddedEvent event) {
-        LOG.info("ProductAddedEvent: [{}] '{}'", event.getId(), event.getName());
-        productRepository.save(new Product(event.getId(), event.getName(), false));
+        LOG.info("ProductAddedEvent to DB MySQL: [{}] '{}'", event.getId(), event.getName());
+        productRepository.save(new Product(new Long(event.getId()), event.getName(), BigDecimal.ZERO, "AUTOMATIC DESCRIPTION", false));
     }
 
     @EventHandler
     public void handle(ProductSaleableEvent event) {
         LOG.info("ProductSaleableEvent: [{}]", event.getId());
-        if (productRepository.exists(event.getId())) {
-            Product product = productRepository.findOne(event.getId());
+        if (productRepository.findOne(new Long(event.getId())) != null) {
+        //if (productRepository.exists(event.getId())) {
+            Product product = productRepository.findOne(new Long(event.getId()));
             if (!product.isSaleable()) {
                 product.setSaleable(true);
                 productRepository.save(product);
@@ -44,9 +48,9 @@ public class ProductViewEventHandler implements ReplayAware {
     @EventHandler
     public void handle(ProductUnsaleableEvent event) {
         LOG.info("ProductUnsaleableEvent: [{}]", event.getId());
-
-        if (productRepository.exists(event.getId())) {
-            Product product = productRepository.findOne(event.getId());
+        if (productRepository.findOne(new Long(event.getId())) != null) {
+        //if (productRepository.exists(event.getId())) {
+            Product product = productRepository.findOne(new Long(event.getId()));
             if (product.isSaleable()) {
                 product.setSaleable(false);
                 productRepository.save(product);

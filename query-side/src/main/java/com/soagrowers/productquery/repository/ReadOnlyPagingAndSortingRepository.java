@@ -10,7 +10,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
  * Created by ben on 07/10/15.
  */
 @NoRepositoryBean
-public interface ReadOnlyPagingAndSortingRepository extends PagingAndSortingRepository<Product, String> {
+public interface ReadOnlyPagingAndSortingRepository extends PagingAndSortingRepository<Product, Long> {
 
     @Override
     @SuppressWarnings("unchecked")
@@ -19,7 +19,7 @@ public interface ReadOnlyPagingAndSortingRepository extends PagingAndSortingRepo
 
     @Override
     @RestResource(exported = false)//false restricts the capability
-    void delete(String aLong);
+    void delete(Long aLong);
 
     @Override
     @RestResource(exported = false)

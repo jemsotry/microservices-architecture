@@ -13,7 +13,7 @@ public class MarkProductAsSaleableCommand {
      * correct one based on the Id in the annotated field.
      */
     @TargetAggregateIdentifier
-    private final String id;
+    private final Long id;
 
     /**
      * This constructor must set the Id field, otherwise it's unclear
@@ -21,11 +21,11 @@ public class MarkProductAsSaleableCommand {
      *
      * @param id
      */
-    public MarkProductAsSaleableCommand(String id) {
+    public MarkProductAsSaleableCommand(Long id) {
         this.id = id;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 }

@@ -22,12 +22,12 @@ import static com.soagrowers.utils.Statics.*;
 public class AddDuplicateProductTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(AddDuplicateProductTest.class);
-    private static String id;
+    private static Long id;
     private static String name;
 
     @BeforeClass
     public static void setupClass() {
-        id = UUID.randomUUID().toString();
+        id = UUID.randomUUID().getLeastSignificantBits();
         name = "Duplicate Testing Product [" + id + "]";
     }
 
