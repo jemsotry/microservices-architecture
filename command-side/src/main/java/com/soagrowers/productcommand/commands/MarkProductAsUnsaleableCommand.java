@@ -10,7 +10,7 @@ import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
 public class MarkProductAsUnsaleableCommand {
 
     @TargetAggregateIdentifier
-    private final String id;
+    private final Long id;
 
     /**
      * This constructor must set the Id field, otherwise it's unclear
@@ -18,11 +18,11 @@ public class MarkProductAsUnsaleableCommand {
      *
      * @param id
      */
-    public MarkProductAsUnsaleableCommand(String id) {
+    public MarkProductAsUnsaleableCommand(Long id) {
         this.id = id;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 }

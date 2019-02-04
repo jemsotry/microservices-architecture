@@ -42,7 +42,7 @@ public class ProductAggregate extends AbstractAnnotatedAggregateRoot {
      * identifies the id field as such.
      */
     @AggregateIdentifier
-    private String id;
+    private Long id;
     private String name;
     private boolean isSaleable = false;
 
@@ -119,7 +119,7 @@ public class ProductAggregate extends AbstractAnnotatedAggregateRoot {
         LOG.debug("Applied: 'ProductUnsaleableEvent' [{}]", event.getId());
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 

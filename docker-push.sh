@@ -1,6 +1,6 @@
 #!/bin/bash
-docker push benwilcock/config-service:latest
-docker push benwilcock/discovery-service:latest
-docker push benwilcock/gateway-service:latest
-docker push benwilcock/product-query-side:latest
-docker push benwilcock/product-command-side:latest
+docker push jemsotry/config-service:latest
+docker push jemsotry/discovery-service:latest
+docker push jemsotry/gateway-service:latest
+docker push jemsotry/product-query-side:latest
+docker push jemsotry/product-command-side:latest

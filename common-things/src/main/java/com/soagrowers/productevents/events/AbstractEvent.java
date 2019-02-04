@@ -4,15 +4,20 @@ import java.io.Serializable;
 
 public abstract class AbstractEvent implements Serializable {
 
-    private String id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private Long id;
 
     public AbstractEvent() {}
 
-    public AbstractEvent(String id) {
+    public AbstractEvent(Long id) {
         this.id = id;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 }

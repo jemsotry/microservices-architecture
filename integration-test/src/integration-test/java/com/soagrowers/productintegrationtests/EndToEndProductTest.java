@@ -26,12 +26,12 @@ import static com.soagrowers.utils.Statics.*;
 public class EndToEndProductTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(EndToEndProductTest.class);
-    private static String id;
+    private static Long id;
     private static String name;
 
     @BeforeClass
     public static void setupClass(){
-        id = UUID.randomUUID().toString();
+        id = UUID.randomUUID().getMostSignificantBits();
         name = "End2End Test Product ["+id+"]";
     }
 
