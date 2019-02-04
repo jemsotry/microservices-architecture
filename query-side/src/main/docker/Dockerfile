@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-oraclejdk8:slim
+FROM java:8
 VOLUME /tmp
 EXPOSE 9090 9091
 ADD product-query-side.jar app.jar

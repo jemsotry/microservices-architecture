@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-oraclejdk8:slim
+FROM java:8
 VOLUME /tmp
 EXPOSE 9000 9001
 ADD product-command-side.jar app.jar

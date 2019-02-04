@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-oraclejdk8:slim
+FROM java:8
 VOLUME /tmp
 EXPOSE 8080
 ADD gateway-service.jar app.jar

@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-oraclejdk8:slim
+FROM java:8
 VOLUME /tmp
 EXPOSE 8761
 ADD discovery-service.jar app.jar

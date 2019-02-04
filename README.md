@@ -35,7 +35,7 @@ $ git clone https://github.com/benwilcock/microservice-sampler.git
 Then build the docker container images.
 
 ```bash
-$ cd microservice-sampler
+$ cd microservice-architecture
 $ ./gradlew clean image
 ```
 
@@ -64,7 +64,7 @@ $ docker ps
 So far so good. Now we want to test the addition of products. In a new terminal window (ctrl-alt-t in Ubuntu), execute the following curl request...
 
 ```bash
-$ curl -X POST -v --header "Content-Type: application/json" --header "Accept: */*" "http://localhost:8080/commands/products/add/1?name=Everything%20Is%20Awesome"
+$ curl -X POST -v --header "Content-Type: application/json" --header "Accept: */*" "http://localhost:8181/commands/products/add/1?name=Everything%20Is%20Awesome"
 ```
 
 >If you're using the public beta of Docker for Mac or Windows (which is highly recommended), you may need to swap 'localhost' for the IP address shown when you ran 'docker ps' to observe the running servers.
@@ -73,16 +73,16 @@ You should see the following response.
 
 ```bash
 *   Trying 127.0.0.1...
-* Connected to localhost (127.0.0.1) port 8080 (#0)
+* Connected to localhost (127.0.0.1) port 8181 (#0)
 > POST /commands/products/add/1?name=Everything%20Is%20Awesome HTTP/1.1
-> Host: localhost:8080
+> Host: localhost:8181
 > User-Agent: curl/7.47.0
 > Content-Type: application/json
 > Accept: */*
 >
 < HTTP/1.1 201 Created
 < Date: Wed, 29 Jun 2016 14:14:26 GMT
-< X-Application-Context: gateway-service:production:8080
+< X-Application-Context: gateway-service:production:8181
 < Date: Wed, 29 Jun 2016 14:14:26 GMT
 < Transfer-Encoding: chunked
 < Server: Jetty(9.2.16.v20160414)
@@ -93,7 +93,7 @@ The response code should be `HTTP/1.1 201 Created`. This means that the MP3 prod
 Now lets check that we can view the product that we just added. To do this we use the query-side API and issue a simple 'GET' request.
 
 ```bash
-$ curl http://localhost:8080/queries/products/1
+$ curl http://localhost:8181/queries/products/1
 ```
 
 You should see the following output. This shows that the query-side microservice has a record for our newly added MP3 product. The product is listed as non-saleable (saleable = false).
@@ -104,10 +104,10 @@ You should see the following output. This shows that the query-side microservice
   "saleable" : false,
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/queries/products/1"
+      "href" : "http://localhost:8181/queries/products/1"
     },
     "product" : {
-      "href" : "http://localhost:8080/queries/products/1"
+      "href" : "http://localhost:8181/queries/products/1"
     }
   }
 }
