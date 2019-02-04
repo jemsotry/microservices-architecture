@@ -5,15 +5,15 @@ package com.soagrowers.productcommand.commands;
  */
 public class WebCreateTodoCommand {
 
-    private final String id;
+    private final Long id;
     private final String description;
 
-    public WebCreateTodoCommand(String id, String description) {
+    public WebCreateTodoCommand(Long id, String description) {
         this.id = id;
         this.description = description;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 

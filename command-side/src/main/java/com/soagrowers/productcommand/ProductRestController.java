@@ -26,7 +26,7 @@ public class ProductRestController {
     CommandGateway commandGateway;
 
     @RequestMapping(value = "/add/{id}", method = RequestMethod.POST)
-    public void add(@PathVariable(value = "id") String id,
+    public void add(@PathVariable(value = "id") Long id,
                     @RequestParam(value = "name", required = true) String name,
                     HttpServletResponse response) {
 
@@ -36,7 +36,7 @@ public class ProductRestController {
             Asserts.INSTANCE.areNotEmpty(Arrays.asList(id, name));
             AddProductCommand command = new AddProductCommand(id, name);
             commandGateway.sendAndWait(command);
-            LOG.info("Added Product [{}] '{}'", id, name);
+            LOG.info("****************** -Added Product [{}] '{}'", id, name);
             response.setStatus(HttpServletResponse.SC_CREATED);// Set up the 201 CREATED response
             return;
         } catch (AssertionError ae) {

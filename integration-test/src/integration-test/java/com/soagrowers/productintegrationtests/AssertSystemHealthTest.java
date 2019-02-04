@@ -20,7 +20,7 @@ public class AssertSystemHealthTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(AssertSystemHealthTest.class);
 
-    private String productId = UUID.randomUUID().toString();
+    private Long productId = UUID.randomUUID().getLeastSignificantBits();
 
 
     @Before

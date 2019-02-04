@@ -11,7 +11,7 @@ buildscript {
 	}
 }
 
-group = 'benwilcock'
+group = 'jemsotry'
 apply plugin: 'spring-boot'
 apply plugin: 'docker'
 

@@ -30,37 +30,37 @@ public class ProductAggregateTest {
     @Test
     public void testAddProduct() throws Exception {
         fixture.given()
-                .when(new AddProductCommand("product-1", "product name"))
-                .expectEvents(new ProductAddedEvent("product-1", "product name"));
+                .when(new AddProductCommand(new Long(1), "product name"))
+                .expectEvents(new ProductAddedEvent(new Long(1), "product name"));
     }
 
     @Test
     public void testMarkProductItemAsSaleable() throws Exception {
-        fixture.given(new ProductAddedEvent("product-2", "product name"))
-                .when(new MarkProductAsSaleableCommand("product-2"))
+        fixture.given(new ProductAddedEvent(new Long(2), "product name"))
+                .when(new MarkProductAsSaleableCommand(new Long(2)))
                 .expectVoidReturnType()
-                .expectEvents(new ProductSaleableEvent("product-2"));
+                .expectEvents(new ProductSaleableEvent(new Long(2)));
     }
 
     @Test
     public void testMarkProductItemAsUnsaleableIsAllowed() throws Exception {
         List<AbstractEvent> events = new ArrayList<AbstractEvent>();
-        events.add(new ProductAddedEvent("product-3", "product name"));
-        events.add(new ProductSaleableEvent("product-3"));
+        events.add(new ProductAddedEvent(new Long(3), "product name"));
+        events.add(new ProductSaleableEvent(new Long(3)));
 
         fixture.given(events)
-                .when(new MarkProductAsUnsaleableCommand("product-3"))
+                .when(new MarkProductAsUnsaleableCommand(new Long(3)))
                 .expectVoidReturnType()
-                .expectEvents(new ProductUnsaleableEvent("product-3"));
+                .expectEvents(new ProductUnsaleableEvent(new Long(3)));
     }
 
     @Test
     public void testMarkProductItemAsUnsaleableIsPrevented() throws Exception {
         List<AbstractEvent> events = new ArrayList<AbstractEvent>();
-        events.add(new ProductAddedEvent("product-3", "product name"));
+        events.add(new ProductAddedEvent(new Long(3), "product name"));
 
         fixture.given(events)
-                .when(new MarkProductAsUnsaleableCommand("product-3"))
+                .when(new MarkProductAsUnsaleableCommand(new Long(3)))
                 .expectException(IllegalStateException.class);
     }
 }

@@ -43,7 +43,7 @@ public class ProductRestControllerParamValidityTest {
         when(gateway.sendAndWait(any())).thenReturn(null);
 
         //Act
-        controller.add(UUID.randomUUID().toString(), "Test Add Product", mockHttpServletResponse);
+        controller.add(UUID.randomUUID().getMostSignificantBits(), "Test Add Product", mockHttpServletResponse);
 
         //Assert
         verify(gateway).sendAndWait(any());
@@ -57,7 +57,7 @@ public class ProductRestControllerParamValidityTest {
         when(gateway.sendAndWait(any())).thenThrow(AssertionError.class);
 
         //Act
-        controller.add(UUID.randomUUID().toString(), "Test Add Product", mockHttpServletResponse);
+        controller.add(UUID.randomUUID().getMostSignificantBits(), "Test Add Product", mockHttpServletResponse);
 
         //Assert
         verify(gateway).sendAndWait(any());
@@ -71,7 +71,7 @@ public class ProductRestControllerParamValidityTest {
         when(gateway.sendAndWait(any())).thenThrow(CommandExecutionException.class);
 
         //Act
-        controller.add(UUID.randomUUID().toString(), "Test Add Product", mockHttpServletResponse);
+        controller.add(UUID.randomUUID().getMostSignificantBits(), "Test Add Product", mockHttpServletResponse);
 
         //Assert
         verify(gateway).sendAndWait(any());
@@ -84,13 +84,13 @@ public class ProductRestControllerParamValidityTest {
         controller.add(null, null, mockHttpServletResponse);
         assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);
 
-        controller.add(UUID.randomUUID().toString(), null, new MockHttpServletResponse());
+        controller.add(UUID.randomUUID().getMostSignificantBits(), null, new MockHttpServletResponse());
         assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);
 
-        controller.add(UUID.randomUUID().toString(), "", new MockHttpServletResponse());
+        controller.add(UUID.randomUUID().getMostSignificantBits(), "", new MockHttpServletResponse());
         assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);
 
-        controller.add("", "", new MockHttpServletResponse());
+        controller.add(new Long(1), "", new MockHttpServletResponse());
         assertTrue(mockHttpServletResponse.getStatus() == HttpServletResponse.SC_BAD_REQUEST);
 
     }
