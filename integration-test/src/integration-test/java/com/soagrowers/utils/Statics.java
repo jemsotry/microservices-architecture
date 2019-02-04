@@ -5,7 +5,7 @@ package com.soagrowers.utils;
  */
 public class Statics {
 
-    public static final int PORT_FOR_GATEWAY = 8081;
+    public static final int PORT_FOR_GATEWAY = 8181;
     public static final int PORT_FOR_COMMANDS = 9000;
     public static final int PORT_FOR_QUERIES = 9001;
     public static final int PORT_FOR_DISCOVERY = 8761;

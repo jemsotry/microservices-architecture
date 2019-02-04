@@ -33,7 +33,7 @@ services:
     image: jemsotry/gateway-service
     container_name: gateway
     ports:
-     - "8081:8081"
+     - "8181:8181"
     depends_on:
      - config
      - discovery
